@@ -9,7 +9,7 @@ if not defined BOOST_ROOT set BOOST_ROOT=%RIME_ROOT%\deps\boost-%boost_version%
 if exist "%BOOST_ROOT%\libs" goto boost_found
 for %%I in ("%BOOST_ROOT%\.") do set src_dir=%%~dpI
 rem download boost source
-aria2c https://github.com/boostorg/boost/releases/download/boost-%boost_version%/boost-%boost_version%.7z -d %src_dir%
+.\aria2c.exe https://github.com/boostorg/boost/releases/download/boost-%boost_version%/boost-%boost_version%.7z -d %src_dir%
 pushd %src_dir%
 7z x boost-%boost_version%.7z
 cd boost-%boost_version%
