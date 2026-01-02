@@ -17,3 +17,4 @@ node_modules/
 *.7z
 .DS_Store
 .idea
+boost_*.tar.gz
