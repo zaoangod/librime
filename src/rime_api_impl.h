@@ -1,5 +1,6 @@
 // intended to be included multiple times in c++ source files with different
 // RIME_FLAVORED macro definitions
+#pragma once
 
 #include "rime_api.h"
 
