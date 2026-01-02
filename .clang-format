@@ -1,2 +1,13 @@
 BasedOnStyle: Chromium
 SortIncludes: false
+
+# 缩进相关
+TabWidth: 4                  # Tab 对应的空格数
+IndentWidth: 4               # 缩进空格宽度
+UseTab: Never                # 不使用 Tab，全部用空格
+IndentCaseLabels: true       # switch 的 case 标签缩进
+IndentAccessModifiers: false # 类的访问修饰符（public/private）不缩进
+ContinuationIndentWidth: 4   # 换行后的续行缩进宽度
+
+# 换行相关
+ColumnLimit: 999                         # 代码行最大字符数（超过自动换行）
