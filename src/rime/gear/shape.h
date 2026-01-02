@@ -14,19 +14,18 @@
 namespace rime {
 
 class ShapeFormatter : public Formatter {
- public:
-  ShapeFormatter(const Ticket& ticket) : Formatter(ticket) {}
-  virtual void Format(string* text);
+   public:
+    ShapeFormatter(const Ticket& ticket) : Formatter(ticket) {}
+    virtual void Format(string* text);
 };
 
 class ShapeProcessor : public Processor {
- public:
-  ShapeProcessor(const Ticket& ticket)
-      : Processor(ticket), formatter_(ticket) {}
-  virtual ProcessResult ProcessKeyEvent(const KeyEvent& key_event);
+   public:
+    ShapeProcessor(const Ticket& ticket) : Processor(ticket), formatter_(ticket) {}
+    virtual ProcessResult ProcessKeyEvent(const KeyEvent& key_event);
 
- private:
-  ShapeFormatter formatter_;
+   private:
+    ShapeFormatter formatter_;
 };
 
 }  // namespace rime

@@ -12,17 +12,17 @@
 namespace rime {
 
 class AbcSegmentor : public Segmentor {
- public:
-  explicit AbcSegmentor(const Ticket& ticket);
+   public:
+    explicit AbcSegmentor(const Ticket& ticket);
 
-  virtual bool Proceed(Segmentation* segmentation);
+    virtual bool Proceed(Segmentation* segmentation);
 
- protected:
-  string alphabet_;
-  string delimiter_;
-  string initials_;
-  string finals_;
-  set<string> extra_tags_;
+   protected:
+    string alphabet_;
+    string delimiter_;
+    string initials_;
+    string finals_;
+    set<string> extra_tags_;
 };
 
 }  // namespace rime

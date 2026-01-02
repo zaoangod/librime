@@ -12,24 +12,23 @@
 namespace rime {
 
 struct CommitRecord {
-  string type;
-  string text;
-  CommitRecord(const string& a_type, const string& a_text)
-      : type(a_type), text(a_text) {}
-  CommitRecord(int keycode) : type("thru"), text(1, keycode) {}
+    string type;
+    string text;
+    CommitRecord(const string& a_type, const string& a_text) : type(a_type), text(a_text) {}
+    CommitRecord(int keycode) : type("thru"), text(1, keycode) {}
 };
 
 class KeyEvent;
 class Composition;
 
 class CommitHistory : public list<CommitRecord> {
- public:
-  static const size_t kMaxRecords = 20;
-  void Push(const CommitRecord& record);
-  void Push(const KeyEvent& key_event);
-  void Push(const Composition& composition, const string& input);
-  string repr() const;
-  string latest_text() const { return empty() ? string() : back().text; }
+   public:
+    static const size_t kMaxRecords = 20;
+    void Push(const CommitRecord& record);
+    void Push(const KeyEvent& key_event);
+    void Push(const Composition& composition, const string& input);
+    string repr() const;
+    string latest_text() const { return empty() ? string() : back().text; }
 };
 
 }  // Namespace rime

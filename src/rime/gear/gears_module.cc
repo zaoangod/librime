@@ -37,57 +37,56 @@
 #include <rime_api.h>
 
 static void rime_gears_initialize() {
-  using namespace rime;
+    using namespace rime;
 
-  LOG(INFO) << "registering components from module 'gears'.";
-  Registry& r = Registry::instance();
+    LOG(INFO) << "registering components from module 'gears'.";
+    Registry& r = Registry::instance();
 
-  // processors
-  r.Register("ascii_composer", new Component<AsciiComposer>);
-  r.Register("chord_composer", new Component<ChordComposer>);
-  r.Register("express_editor", new Component<ExpressEditor>);
-  r.Register("fluid_editor", new Component<FluidEditor>);
-  r.Register("fluency_editor", new Component<FluidEditor>);  // alias
-  r.Register("key_binder", new Component<KeyBinder>);
-  r.Register("navigator", new Component<Navigator>);
-  r.Register("punctuator", new Component<Punctuator>);
-  r.Register("recognizer", new Component<Recognizer>);
-  r.Register("selector", new Component<Selector>);
-  r.Register("speller", new Component<Speller>);
-  r.Register("shape_processor", new Component<ShapeProcessor>);
+    // processors
+    r.Register("ascii_composer", new Component<AsciiComposer>);
+    r.Register("chord_composer", new Component<ChordComposer>);
+    r.Register("express_editor", new Component<ExpressEditor>);
+    r.Register("fluid_editor", new Component<FluidEditor>);
+    r.Register("fluency_editor", new Component<FluidEditor>);  // alias
+    r.Register("key_binder", new Component<KeyBinder>);
+    r.Register("navigator", new Component<Navigator>);
+    r.Register("punctuator", new Component<Punctuator>);
+    r.Register("recognizer", new Component<Recognizer>);
+    r.Register("selector", new Component<Selector>);
+    r.Register("speller", new Component<Speller>);
+    r.Register("shape_processor", new Component<ShapeProcessor>);
 
-  // segmentors
-  r.Register("abc_segmentor", new Component<AbcSegmentor>);
-  r.Register("affix_segmentor", new Component<AffixSegmentor>);
-  r.Register("ascii_segmentor", new Component<AsciiSegmentor>);
-  r.Register("matcher", new Component<Matcher>);
-  r.Register("punct_segmentor", new Component<PunctSegmentor>);
-  r.Register("fallback_segmentor", new Component<FallbackSegmentor>);
+    // segmentors
+    r.Register("abc_segmentor", new Component<AbcSegmentor>);
+    r.Register("affix_segmentor", new Component<AffixSegmentor>);
+    r.Register("ascii_segmentor", new Component<AsciiSegmentor>);
+    r.Register("matcher", new Component<Matcher>);
+    r.Register("punct_segmentor", new Component<PunctSegmentor>);
+    r.Register("fallback_segmentor", new Component<FallbackSegmentor>);
 
-  // translators
-  r.Register("echo_translator", new Component<EchoTranslator>);
-  r.Register("punct_translator", new Component<PunctTranslator>);
-  r.Register("table_translator", new Component<TableTranslator>);
-  r.Register("script_translator", new Component<ScriptTranslator>);
-  r.Register("r10n_translator", new Component<ScriptTranslator>);  // alias
-  r.Register("reverse_lookup_translator",
-             new Component<ReverseLookupTranslator>);
-  r.Register("schema_list_translator", new Component<SchemaListTranslator>);
-  r.Register("switch_translator", new Component<SwitchTranslator>);
-  r.Register("history_translator", new Component<HistoryTranslator>);
+    // translators
+    r.Register("echo_translator", new Component<EchoTranslator>);
+    r.Register("punct_translator", new Component<PunctTranslator>);
+    r.Register("table_translator", new Component<TableTranslator>);
+    r.Register("script_translator", new Component<ScriptTranslator>);
+    r.Register("r10n_translator", new Component<ScriptTranslator>);  // alias
+    r.Register("reverse_lookup_translator", new Component<ReverseLookupTranslator>);
+    r.Register("schema_list_translator", new Component<SchemaListTranslator>);
+    r.Register("switch_translator", new Component<SwitchTranslator>);
+    r.Register("history_translator", new Component<HistoryTranslator>);
 
-  // filters
-  r.Register("simplifier", new SimplifierComponent);
-  r.Register("uniquifier", new Component<Uniquifier>);
-  if (!r.Find("charset_filter")) {  // allow improved implementation
-    r.Register("charset_filter", new Component<CharsetFilter>);
-  }
-  r.Register("cjk_minifier", new Component<CharsetFilter>);  // alias
-  r.Register("reverse_lookup_filter", new Component<ReverseLookupFilter>);
-  r.Register("single_char_filter", new Component<SingleCharFilter>);
+    // filters
+    r.Register("simplifier", new SimplifierComponent);
+    r.Register("uniquifier", new Component<Uniquifier>);
+    if (!r.Find("charset_filter")) {  // allow improved implementation
+        r.Register("charset_filter", new Component<CharsetFilter>);
+    }
+    r.Register("cjk_minifier", new Component<CharsetFilter>);  // alias
+    r.Register("reverse_lookup_filter", new Component<ReverseLookupFilter>);
+    r.Register("single_char_filter", new Component<SingleCharFilter>);
 
-  // formatters
-  r.Register("shape_formatter", new Component<ShapeFormatter>);
+    // formatters
+    r.Register("shape_formatter", new Component<ShapeFormatter>);
 }
 
 static void rime_gears_finalize() {}

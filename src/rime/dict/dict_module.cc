@@ -20,26 +20,26 @@
 #include <rime/dict/user_db_recovery_task.h>
 
 static void rime_dict_initialize() {
-  using namespace rime;
+    using namespace rime;
 
-  LOG(INFO) << "registering components from module 'dict'.";
-  Registry& r = Registry::instance();
+    LOG(INFO) << "registering components from module 'dict'.";
+    Registry& r = Registry::instance();
 
-  r.Register("tabledb", new DbComponent<TableDb>);
-  r.Register("stabledb", new DbComponent<StableDb>);
-  r.Register("plain_userdb", new UserDbComponent<TextDb>);
-  r.Register("userdb", new UserDbComponent<LevelDb>);
-  // NOTE: register a legacy_userdb component in your plugin if you wish to
-  // upgrade userdbs from an old file format (eg. TreeDb) during maintenance.
-  // r.Register("legacy_userdb", ...);
+    r.Register("tabledb", new DbComponent<TableDb>);
+    r.Register("stabledb", new DbComponent<StableDb>);
+    r.Register("plain_userdb", new UserDbComponent<TextDb>);
+    r.Register("userdb", new UserDbComponent<LevelDb>);
+    // NOTE: register a legacy_userdb component in your plugin if you wish to
+    // upgrade userdbs from an old file format (eg. TreeDb) during maintenance.
+    // r.Register("legacy_userdb", ...);
 
-  r.Register("corrector", new CorrectorComponent);
+    r.Register("corrector", new CorrectorComponent);
 
-  r.Register("dictionary", new DictionaryComponent);
-  r.Register("reverse_lookup_dictionary", new ReverseLookupDictionaryComponent);
-  r.Register("user_dictionary", new UserDictionaryComponent);
+    r.Register("dictionary", new DictionaryComponent);
+    r.Register("reverse_lookup_dictionary", new ReverseLookupDictionaryComponent);
+    r.Register("user_dictionary", new UserDictionaryComponent);
 
-  r.Register("userdb_recovery_task", new UserDbRecoveryTaskComponent);
+    r.Register("userdb_recovery_task", new UserDbRecoveryTaskComponent);
 }
 
 static void rime_dict_finalize() {}

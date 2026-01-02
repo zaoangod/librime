@@ -17,25 +17,24 @@ namespace rime {
 class ReverseLookupDictionary;
 
 class ReverseLookupFilter : public Filter, TagMatching {
- public:
-  explicit ReverseLookupFilter(const Ticket& ticket);
+   public:
+    explicit ReverseLookupFilter(const Ticket& ticket);
 
-  virtual an<Translation> Apply(an<Translation> translation,
-                                CandidateList* candidates);
+    virtual an<Translation> Apply(an<Translation> translation, CandidateList* candidates);
 
-  virtual bool AppliesToSegment(Segment* segment) { return TagsMatch(segment); }
+    virtual bool AppliesToSegment(Segment* segment) { return TagsMatch(segment); }
 
-  void Process(const an<Candidate>& cand);
+    void Process(const an<Candidate>& cand);
 
- protected:
-  void Initialize();
+   protected:
+    void Initialize();
 
-  bool initialized_ = false;
-  the<ReverseLookupDictionary> rev_dict_;
-  // settings
-  bool overwrite_comment_ = false;
-  bool append_comment_ = false;
-  Projection comment_formatter_;
+    bool initialized_ = false;
+    the<ReverseLookupDictionary> rev_dict_;
+    // settings
+    bool overwrite_comment_ = false;
+    bool append_comment_ = false;
+    Projection comment_formatter_;
 };
 
 }  // namespace rime

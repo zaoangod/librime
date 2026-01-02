@@ -16,18 +16,17 @@ class Engine;
 class Segmentation;
 
 class Segmentor : public Class<Segmentor, const Ticket&> {
- public:
-  explicit Segmentor(const Ticket& ticket)
-      : engine_(ticket.engine), name_space_(ticket.name_space) {}
-  virtual ~Segmentor() = default;
+   public:
+    explicit Segmentor(const Ticket& ticket) : engine_(ticket.engine), name_space_(ticket.name_space) {}
+    virtual ~Segmentor() = default;
 
-  virtual bool Proceed(Segmentation* segmentation) = 0;
+    virtual bool Proceed(Segmentation* segmentation) = 0;
 
-  string name_space() const { return name_space_; }
+    string name_space() const { return name_space_; }
 
- protected:
-  Engine* engine_;
-  string name_space_;
+   protected:
+    Engine* engine_;
+    string name_space_;
 };
 
 }  // namespace rime

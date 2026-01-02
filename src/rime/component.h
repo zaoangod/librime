@@ -12,29 +12,27 @@
 namespace rime {
 
 class ComponentBase {
- public:
-  ComponentBase() = default;
-  virtual ~ComponentBase() = default;
+   public:
+    ComponentBase() = default;
+    virtual ~ComponentBase() = default;
 };
 
 template <class T, class Arg>
 struct Class {
-  using Initializer = Arg;
+    using Initializer = Arg;
 
-  class Component : virtual public ComponentBase {
-   public:
-    virtual T* Create(Initializer arg) = 0;
-  };
+    class Component : virtual public ComponentBase {
+       public:
+        virtual T* Create(Initializer arg) = 0;
+    };
 
-  static Component* Require(const string& name) {
-    return dynamic_cast<Component*>(Registry::instance().Find(name));
-  }
+    static Component* Require(const string& name) { return dynamic_cast<Component*>(Registry::instance().Find(name)); }
 };
 
 template <class T>
 struct Component : public T::Component {
- public:
-  T* Create(typename T::Initializer arg) { return new T(arg); }
+   public:
+    T* Create(typename T::Initializer arg) { return new T(arg); }
 };
 
 }  // namespace rime

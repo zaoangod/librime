@@ -21,15 +21,15 @@ namespace rime {
 namespace reverse {
 
 struct Metadata {
-  static const int kFormatMaxLength = 32;
-  char format[kFormatMaxLength];
-  uint32_t dict_file_checksum;
-  String dict_settings;
-  List<StringId> index;
-  OffsetPtr<char> key_trie;
-  uint32_t key_trie_size;
-  OffsetPtr<char> value_trie;
-  uint32_t value_trie_size;
+    static const int kFormatMaxLength = 32;
+    char format[kFormatMaxLength];
+    uint32_t dict_file_checksum;
+    String dict_settings;
+    List<StringId> index;
+    OffsetPtr<char> key_trie;
+    uint32_t key_trie_size;
+    OffsetPtr<char> value_trie;
+    uint32_t value_trie_size;
 };
 
 }  // namespace reverse
@@ -38,50 +38,43 @@ struct Ticket;
 class DictSettings;
 
 class ReverseDb : public MappedFile {
- public:
-  explicit ReverseDb(const path& file_path);
+   public:
+    explicit ReverseDb(const path& file_path);
 
-  bool Load();
-  bool Lookup(const string& text, string* result);
+    bool Load();
+    bool Lookup(const string& text, string* result);
 
-  bool Build(DictSettings* settings,
-             const Syllabary& syllabary,
-             const Vocabulary& vocabulary,
-             const ReverseLookupTable& stems,
-             uint32_t dict_file_checksum);
-  bool Save();
+    bool Build(DictSettings* settings, const Syllabary& syllabary, const Vocabulary& vocabulary, const ReverseLookupTable& stems, uint32_t dict_file_checksum);
+    bool Save();
 
-  uint32_t dict_file_checksum() const;
-  reverse::Metadata* metadata() const { return metadata_; }
+    uint32_t dict_file_checksum() const;
+    reverse::Metadata* metadata() const { return metadata_; }
 
- private:
-  reverse::Metadata* metadata_ = nullptr;
-  the<StringTable> key_trie_;
-  the<StringTable> value_trie_;
+   private:
+    reverse::Metadata* metadata_ = nullptr;
+    the<StringTable> key_trie_;
+    the<StringTable> value_trie_;
 };
 
-class ReverseLookupDictionary
-    : public Class<ReverseLookupDictionary, const Ticket&> {
- public:
-  explicit ReverseLookupDictionary(an<ReverseDb> db);
-  bool Load();
-  bool ReverseLookup(const string& text, string* result);
-  bool LookupStems(const string& text, string* result);
-  an<DictSettings> GetDictSettings();
+class ReverseLookupDictionary : public Class<ReverseLookupDictionary, const Ticket&> {
+   public:
+    explicit ReverseLookupDictionary(an<ReverseDb> db);
+    bool Load();
+    bool ReverseLookup(const string& text, string* result);
+    bool LookupStems(const string& text, string* result);
+    an<DictSettings> GetDictSettings();
 
- protected:
-  an<ReverseDb> db_;
+   protected:
+    an<ReverseDb> db_;
 };
 
 class ResourceResolver;
 
-class ReverseLookupDictionaryComponent
-    : public ReverseLookupDictionary::Component,
-      protected DbPool<ReverseDb> {
- public:
-  ReverseLookupDictionaryComponent();
-  ReverseLookupDictionary* Create(const Ticket& ticket);
-  ReverseLookupDictionary* Create(const string& dict_name);
+class ReverseLookupDictionaryComponent : public ReverseLookupDictionary::Component, protected DbPool<ReverseDb> {
+   public:
+    ReverseLookupDictionaryComponent();
+    ReverseLookupDictionary* Create(const Ticket& ticket);
+    ReverseLookupDictionary* Create(const string& dict_name);
 };
 
 }  // namespace rime

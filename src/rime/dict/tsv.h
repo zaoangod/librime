@@ -15,57 +15,54 @@ using Tsv = vector<string>;
 
 using TsvParser = function<bool(const Tsv& row, string* key, string* value)>;
 
-using TsvFormatter =
-    function<bool(const string& key, const string& value, Tsv* row)>;
+using TsvFormatter = function<bool(const string& key, const string& value, Tsv* row)>;
 
 class Sink;
 class Source;
 
 class TsvReader {
- public:
-  TsvReader(const path& file_path, TsvParser parser)
-      : file_path_(file_path), parser_(parser) {}
-  // return number of records read
-  int operator()(Sink* sink);
+   public:
+    TsvReader(const path& file_path, TsvParser parser) : file_path_(file_path), parser_(parser) {}
+    // return number of records read
+    int operator()(Sink* sink);
 
- protected:
-  path file_path_;
-  TsvParser parser_;
+   protected:
+    path file_path_;
+    TsvParser parser_;
 };
 
 class TsvWriter {
- public:
-  TsvWriter(const path& file_path, TsvFormatter formatter)
-      : file_path_(file_path), formatter_(formatter) {}
-  // return number of records written
-  int operator()(Source* source);
+   public:
+    TsvWriter(const path& file_path, TsvFormatter formatter) : file_path_(file_path), formatter_(formatter) {}
+    // return number of records written
+    int operator()(Source* source);
 
- protected:
-  path file_path_;
-  TsvFormatter formatter_;
+   protected:
+    path file_path_;
+    TsvFormatter formatter_;
 
- public:
-  string file_description;
+   public:
+    string file_description;
 };
 
 template <class SinkType>
 int operator<<(SinkType& sink, TsvReader& reader) {
-  return reader(&sink);
+    return reader(&sink);
 }
 
 template <class SinkType>
 int operator>>(TsvReader& reader, SinkType& sink) {
-  return reader(&sink);
+    return reader(&sink);
 }
 
 template <class SourceType>
 int operator<<(TsvWriter& writer, SourceType& source) {
-  return writer(&source);
+    return writer(&source);
 }
 
 template <class SourceType>
 int operator>>(SourceType& source, TsvWriter& writer) {
-  return writer(&source);
+    return writer(&source);
 }
 
 }  // namespace rime

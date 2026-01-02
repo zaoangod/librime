@@ -12,10 +12,10 @@
 namespace rime {
 
 class AsciiSegmentor : public Segmentor {
- public:
-  explicit AsciiSegmentor(const Ticket& ticket);
+   public:
+    explicit AsciiSegmentor(const Ticket& ticket);
 
-  virtual bool Proceed(Segmentation* segmentation);
+    virtual bool Proceed(Segmentation* segmentation);
 };
 
 }  // namespace rime

@@ -13,58 +13,58 @@ class ConfigCompiler;
 struct ConfigResource;
 
 class ConfigCompilerPlugin {
- public:
-  typedef bool Review(ConfigCompiler* compiler, an<ConfigResource> resource);
+   public:
+    typedef bool Review(ConfigCompiler* compiler, an<ConfigResource> resource);
 
-  virtual ~ConfigCompilerPlugin() = default;
+    virtual ~ConfigCompilerPlugin() = default;
 
-  virtual Review ReviewCompileOutput = 0;
-  virtual Review ReviewLinkOutput = 0;
+    virtual Review ReviewCompileOutput = 0;
+    virtual Review ReviewLinkOutput = 0;
 };
 
 class AutoPatchConfigPlugin : public ConfigCompilerPlugin {
- public:
-  Review ReviewCompileOutput;
-  Review ReviewLinkOutput;
+   public:
+    Review ReviewCompileOutput;
+    Review ReviewLinkOutput;
 };
 
 class DefaultConfigPlugin : public ConfigCompilerPlugin {
- public:
-  Review ReviewCompileOutput;
-  Review ReviewLinkOutput;
+   public:
+    Review ReviewCompileOutput;
+    Review ReviewLinkOutput;
 };
 
 class LegacyPresetConfigPlugin : public ConfigCompilerPlugin {
- public:
-  Review ReviewCompileOutput;
-  Review ReviewLinkOutput;
+   public:
+    Review ReviewCompileOutput;
+    Review ReviewLinkOutput;
 };
 
 class LegacyDictionaryConfigPlugin : public ConfigCompilerPlugin {
- public:
-  Review ReviewCompileOutput;
-  Review ReviewLinkOutput;
+   public:
+    Review ReviewCompileOutput;
+    Review ReviewLinkOutput;
 };
 
 class BuildInfoPlugin : public ConfigCompilerPlugin {
- public:
-  Review ReviewCompileOutput;
-  Review ReviewLinkOutput;
+   public:
+    Review ReviewCompileOutput;
+    Review ReviewLinkOutput;
 };
 
 class ResourceResolver;
 struct ResourceType;
 
 class SaveOutputPlugin : public ConfigCompilerPlugin {
- public:
-  SaveOutputPlugin();
-  virtual ~SaveOutputPlugin();
+   public:
+    SaveOutputPlugin();
+    virtual ~SaveOutputPlugin();
 
-  Review ReviewCompileOutput;
-  Review ReviewLinkOutput;
+    Review ReviewCompileOutput;
+    Review ReviewLinkOutput;
 
- private:
-  the<ResourceResolver> resource_resolver_;
+   private:
+    the<ResourceResolver> resource_resolver_;
 };
 
 }  // namespace rime

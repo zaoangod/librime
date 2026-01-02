@@ -17,29 +17,28 @@ class Deployer;
 using UserDictList = vector<string>;
 
 class RIME_DLL UserDictManager {
- public:
-  UserDictManager(Deployer* deployer);
+   public:
+    UserDictManager(Deployer* deployer);
 
-  // If component is null, the current userdb component is used.
-  void GetUserDictList(UserDictList* user_dict_list,
-                       UserDb::Component* component = nullptr);
+    // If component is null, the current userdb component is used.
+    void GetUserDictList(UserDictList* user_dict_list, UserDb::Component* component = nullptr);
 
-  // CAVEAT: the user dict should be closed before the following operations
-  bool Backup(const string& dict_name);
-  bool Restore(const path& snapshot_file);
-  bool UpgradeUserDict(const string& dict_name);
-  // returns num of exported entries, -1 denotes failure
-  int Export(const string& dict_name, const path& text_file);
-  // returns num of imported entries, -1 denotes failure
-  int Import(const string& dict_name, const path& text_file);
+    // CAVEAT: the user dict should be closed before the following operations
+    bool Backup(const string& dict_name);
+    bool Restore(const path& snapshot_file);
+    bool UpgradeUserDict(const string& dict_name);
+    // returns num of exported entries, -1 denotes failure
+    int Export(const string& dict_name, const path& text_file);
+    // returns num of imported entries, -1 denotes failure
+    int Import(const string& dict_name, const path& text_file);
 
-  bool Synchronize(const string& dict_name);
-  bool SynchronizeAll();
+    bool Synchronize(const string& dict_name);
+    bool SynchronizeAll();
 
- protected:
-  Deployer* deployer_;
-  path path_;
-  UserDb::Component* user_db_component_;
+   protected:
+    Deployer* deployer_;
+    path path_;
+    UserDb::Component* user_db_component_;
 };
 
 }  // namespace rime

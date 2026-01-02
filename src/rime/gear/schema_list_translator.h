@@ -13,10 +13,10 @@
 namespace rime {
 
 class SchemaListTranslator : public Translator {
- public:
-  SchemaListTranslator(const Ticket& ticket);
+   public:
+    SchemaListTranslator(const Ticket& ticket);
 
-  virtual an<Translation> Query(const string& input, const Segment& segment);
+    virtual an<Translation> Query(const string& input, const Segment& segment);
 };
 
 }  // namespace rime

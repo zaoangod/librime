@@ -12,14 +12,13 @@
 namespace rime {
 
 class Messenger {
- public:
-  using MessageSink =
-      signal<void(const string& message_type, const string& message_value)>;
+   public:
+    using MessageSink = signal<void(const string& message_type, const string& message_value)>;
 
-  MessageSink& message_sink() { return message_sink_; }
+    MessageSink& message_sink() { return message_sink_; }
 
- protected:
-  MessageSink message_sink_;
+   protected:
+    MessageSink message_sink_;
 };
 
 }  // namespace rime

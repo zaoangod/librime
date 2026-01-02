@@ -12,11 +12,10 @@
 namespace rime {
 
 class SingleCharFilter : public Filter {
- public:
-  explicit SingleCharFilter(const Ticket& ticket);
+   public:
+    explicit SingleCharFilter(const Ticket& ticket);
 
-  virtual an<Translation> Apply(an<Translation> translation,
-                                CandidateList* candidates);
+    virtual an<Translation> Apply(an<Translation> translation, CandidateList* candidates);
 };
 
 }  // namespace rime

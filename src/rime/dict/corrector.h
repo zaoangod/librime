@@ -19,34 +19,32 @@ namespace rime {
 struct Ticket;
 
 class SymDeleteCollector {
- public:
-  explicit SymDeleteCollector(const Syllabary& syllabary)
-      : syllabary_(syllabary) {}
+   public:
+    explicit SymDeleteCollector(const Syllabary& syllabary) : syllabary_(syllabary) {}
 
-  Script Collect(size_t edit_distance);
+    Script Collect(size_t edit_distance);
 
- private:
-  const Syllabary& syllabary_;
+   private:
+    const Syllabary& syllabary_;
 };
 
 namespace corrector {
 using Distance = size_t;
 struct Correction {
-  size_t distance;
-  SyllableId syllable;
-  size_t length;
+    size_t distance;
+    SyllableId syllable;
+    size_t length;
 };
 class Corrections : public hash_map<SyllableId, Correction> {
- public:
-  /// Update for better correction
-  /// \param syllable
-  /// \param correction
-  inline void Alter(SyllableId syllable, Correction correction) {
-    if (find(syllable) == end() ||
-        correction.distance < (*this)[syllable].distance) {
-      (*this)[syllable] = correction;
-    }
-  };
+   public:
+    /// Update for better correction
+    /// \param syllable
+    /// \param correction
+    inline void Alter(SyllableId syllable, Correction correction) {
+        if (find(syllable) == end() || correction.distance < (*this)[syllable].distance) {
+            (*this)[syllable] = correction;
+        }
+    };
 };
 }  // namespace corrector
 
@@ -54,79 +52,61 @@ class Corrections : public hash_map<SyllableId, Correction> {
  * The unify interface of correctors
  */
 class Corrector : public Class<Corrector, const Ticket&> {
- public:
-  virtual ~Corrector() = default;
-  RIME_DLL virtual void ToleranceSearch(const Prism& prism,
-                                        const string& key,
-                                        corrector::Corrections* results,
-                                        size_t tolerance) = 0;
+   public:
+    virtual ~Corrector() = default;
+    RIME_DLL virtual void ToleranceSearch(const Prism& prism, const string& key, corrector::Corrections* results, size_t tolerance) = 0;
 };
 
 class CorrectorComponent : public Corrector::Component {
- public:
-  CorrectorComponent();
-  ~CorrectorComponent() override = default;
-  Corrector* Create(const Ticket& ticket) noexcept override;
-
- private:
-  template <class... Cs>
-  static Corrector* Combine(Cs... args);
-
-  the<ResourceResolver> resolver_;
-
-  class Unified : public Corrector {
    public:
-    Unified() = default;
-    RIME_DLL void ToleranceSearch(const Prism& prism,
-                                  const string& key,
-                                  corrector::Corrections* results,
-                                  size_t tolerance) override;
-    template <class... Cs>
-    void Add(Cs... args) {
-      contents = {args...};
-    }
+    CorrectorComponent();
+    ~CorrectorComponent() override = default;
+    Corrector* Create(const Ticket& ticket) noexcept override;
 
    private:
-    vector<of<Corrector>> contents = {};
-  };
+    template <class... Cs>
+    static Corrector* Combine(Cs... args);
+
+    the<ResourceResolver> resolver_;
+
+    class Unified : public Corrector {
+       public:
+        Unified() = default;
+        RIME_DLL void ToleranceSearch(const Prism& prism, const string& key, corrector::Corrections* results, size_t tolerance) override;
+        template <class... Cs>
+        void Add(Cs... args) {
+            contents = {args...};
+        }
+
+       private:
+        vector<of<Corrector>> contents = {};
+    };
 };
 
 class EditDistanceCorrector : public Corrector, public Prism {
- public:
-  ~EditDistanceCorrector() override = default;
-  RIME_DLL explicit EditDistanceCorrector(const path& file_path);
+   public:
+    ~EditDistanceCorrector() override = default;
+    RIME_DLL explicit EditDistanceCorrector(const path& file_path);
 
-  RIME_DLL bool Build(const Syllabary& syllabary,
-                      const Script* script = nullptr,
-                      uint32_t dict_file_checksum = 0,
-                      uint32_t schema_file_checksum = 0);
+    RIME_DLL bool Build(const Syllabary& syllabary, const Script* script = nullptr, uint32_t dict_file_checksum = 0, uint32_t schema_file_checksum = 0);
 
-  RIME_DLL void ToleranceSearch(const Prism& prism,
-                                const string& key,
-                                corrector::Corrections* results,
-                                size_t tolerance) override;
-  corrector::Distance LevenshteinDistance(const std::string& s1,
-                                          const std::string& s2);
-  corrector::Distance RestrictedDistance(const std::string& s1,
-                                         const std::string& s2,
-                                         corrector::Distance threshold);
+    RIME_DLL void ToleranceSearch(const Prism& prism, const string& key, corrector::Corrections* results, size_t tolerance) override;
+    corrector::Distance LevenshteinDistance(const std::string& s1, const std::string& s2);
+    corrector::Distance RestrictedDistance(const std::string& s1, const std::string& s2, corrector::Distance threshold);
 };
 
 class RIME_DLL NearSearchCorrector : public Corrector {
- public:
-  NearSearchCorrector() = default;
-  ~NearSearchCorrector() override = default;
-  void ToleranceSearch(const Prism& prism,
-                       const string& key,
-                       corrector::Corrections* results,
-                       size_t tolerance) override;
+   public:
+    NearSearchCorrector() = default;
+    ~NearSearchCorrector() override = default;
+    void ToleranceSearch(const Prism& prism, const string& key, corrector::Corrections* results, size_t tolerance) override;
 };
 
 template <class... Cs>
 Corrector* CorrectorComponent::Combine(Cs... args) {
-  auto u = new Unified();
-  u->Add(args...);
-  return u;
+    auto u = new Unified();
+    u->Add(args...);
+    return u;
 }
 
 }  // namespace rime

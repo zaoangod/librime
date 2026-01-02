@@ -19,66 +19,63 @@ namespace rime {
 using Chord = set<int>;
 
 struct ChordingState {
-  Chord pressed_keys;
-  Chord recognized_chord;
+    Chord pressed_keys;
+    Chord recognized_chord;
 
-  bool IsPressed(int ch) const {
-    return pressed_keys.find(ch) != pressed_keys.end();
-  }
+    bool IsPressed(int ch) const { return pressed_keys.find(ch) != pressed_keys.end(); }
 
-  bool PressKey(int ch) { return pressed_keys.insert(ch).second; }
+    bool PressKey(int ch) { return pressed_keys.insert(ch).second; }
 
-  bool ReleaseKey(int ch) { return pressed_keys.erase(ch) != 0; }
+    bool ReleaseKey(int ch) { return pressed_keys.erase(ch) != 0; }
 
-  bool AddKeyToChord(int ch) { return recognized_chord.insert(ch).second; }
+    bool AddKeyToChord(int ch) { return recognized_chord.insert(ch).second; }
 
-  void Clear() {
-    pressed_keys.clear();
-    recognized_chord.clear();
-  }
+    void Clear() {
+        pressed_keys.clear();
+        recognized_chord.clear();
+    }
 };
 
-class ChordComposer : public Processor,
-                      public KeyBindingProcessor<ChordComposer> {
- public:
-  ChordComposer(const Ticket& ticket);
-  ~ChordComposer();
+class ChordComposer : public Processor, public KeyBindingProcessor<ChordComposer> {
+   public:
+    ChordComposer(const Ticket& ticket);
+    ~ChordComposer();
 
-  virtual ProcessResult ProcessKeyEvent(const KeyEvent& key_event);
+    virtual ProcessResult ProcessKeyEvent(const KeyEvent& key_event);
 
-  Handler CommitRawInput;
+    Handler CommitRawInput;
 
- protected:
-  bool FinishChordConditionIsMet() const;
-  ProcessResult ProcessChordingKey(const KeyEvent& key_event);
-  ProcessResult ProcessFunctionKey(const KeyEvent& key_event);
-  string SerializeChord(const Chord& chord);
-  void UpdateChord(const Chord& chord);
-  void FinishChord(const Chord& chord);
-  void ClearChord();
-  bool DeleteLastSyllable();
-  void OnContextUpdate(Context* ctx);
-  void OnUnhandledKey(Context* ctx, const KeyEvent& key);
+   protected:
+    bool FinishChordConditionIsMet() const;
+    ProcessResult ProcessChordingKey(const KeyEvent& key_event);
+    ProcessResult ProcessFunctionKey(const KeyEvent& key_event);
+    string SerializeChord(const Chord& chord);
+    void UpdateChord(const Chord& chord);
+    void FinishChord(const Chord& chord);
+    void ClearChord();
+    bool DeleteLastSyllable();
+    void OnContextUpdate(Context* ctx);
+    void OnUnhandledKey(Context* ctx, const KeyEvent& key);
 
-  KeySequence chording_keys_;
-  string delimiter_;
-  Projection algebra_;
-  Projection output_format_;
-  Projection prompt_format_;
-  bool use_control_ = false;
-  bool use_alt_ = false;
-  bool use_shift_ = false;
-  bool use_super_ = false;
-  bool use_caps_ = false;
-  bool finish_chord_on_first_key_release_ = false;
+    KeySequence chording_keys_;
+    string delimiter_;
+    Projection algebra_;
+    Projection output_format_;
+    Projection prompt_format_;
+    bool use_control_ = false;
+    bool use_alt_ = false;
+    bool use_shift_ = false;
+    bool use_super_ = false;
+    bool use_caps_ = false;
+    bool finish_chord_on_first_key_release_ = false;
 
-  ChordingState state_;
-  bool editing_chord_ = false;
-  bool sending_chord_ = false;
-  bool composing_ = false;
-  string raw_sequence_;
-  connection update_connection_;
-  connection unhandled_key_connection_;
+    ChordingState state_;
+    bool editing_chord_ = false;
+    bool sending_chord_ = false;
+    bool composing_ = false;
+    string raw_sequence_;
+    connection update_connection_;
+    connection unhandled_key_connection_;
 };
 
 }  // namespace rime

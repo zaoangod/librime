@@ -18,24 +18,22 @@ class Calculation;
 class Schema;
 
 class Script : public map<string, vector<Spelling>> {
- public:
-  RIME_DLL bool AddSyllable(const string& syllable);
-  void Merge(const string& s,
-             const SpellingProperties& sp,
-             const vector<Spelling>& v);
-  void Dump(const path& file_path) const;
+   public:
+    RIME_DLL bool AddSyllable(const string& syllable);
+    void Merge(const string& s, const SpellingProperties& sp, const vector<Spelling>& v);
+    void Dump(const path& file_path) const;
 };
 
 class Projection {
- public:
-  RIME_DLL bool Load(an<ConfigList> settings);
-  // "spelling" -> "gnilleps"
-  RIME_DLL bool Apply(string* value);
-  // {z, y, x} -> {a, b, c, d}
-  RIME_DLL bool Apply(Script* value);
+   public:
+    RIME_DLL bool Load(an<ConfigList> settings);
+    // "spelling" -> "gnilleps"
+    RIME_DLL bool Apply(string* value);
+    // {z, y, x} -> {a, b, c, d}
+    RIME_DLL bool Apply(Script* value);
 
- protected:
-  vector<of<Calculation>> calculation_;
+   protected:
+    vector<of<Calculation>> calculation_;
 };
 
 }  // namespace rime

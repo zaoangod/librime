@@ -12,62 +12,62 @@
 namespace rime {
 
 class Sink {
- public:
-  virtual ~Sink() = default;
-  virtual bool MetaPut(const string& key, const string& value) = 0;
-  virtual bool Put(const string& key, const string& value) = 0;
+   public:
+    virtual ~Sink() = default;
+    virtual bool MetaPut(const string& key, const string& value) = 0;
+    virtual bool Put(const string& key, const string& value) = 0;
 
-  template <class SourceType>
-  int operator<<(SourceType& source);
+    template <class SourceType>
+    int operator<<(SourceType& source);
 };
 
 class Source {
- public:
-  virtual ~Source() = default;
-  virtual bool MetaGet(string* key, string* value) = 0;
-  virtual bool Get(string* key, string* value) = 0;
+   public:
+    virtual ~Source() = default;
+    virtual bool MetaGet(string* key, string* value) = 0;
+    virtual bool Get(string* key, string* value) = 0;
 
-  template <class SinkType>
-  int operator>>(SinkType& sink);
+    template <class SinkType>
+    int operator>>(SinkType& sink);
 
-  int Dump(Sink* sink);
+    int Dump(Sink* sink);
 };
 
 template <class SourceType>
 int Sink::operator<<(SourceType& source) {
-  return source.Dump(this);
+    return source.Dump(this);
 }
 
 template <class SinkType>
 int Source::operator>>(SinkType& sink) {
-  return Dump(&sink);
+    return Dump(&sink);
 }
 
 class Db;
 class DbAccessor;
 
 class DbSink : public Sink {
- public:
-  explicit DbSink(Db* db);
+   public:
+    explicit DbSink(Db* db);
 
-  virtual bool MetaPut(const string& key, const string& value);
-  virtual bool Put(const string& key, const string& value);
+    virtual bool MetaPut(const string& key, const string& value);
+    virtual bool Put(const string& key, const string& value);
 
- protected:
-  Db* db_;
+   protected:
+    Db* db_;
 };
 
 class DbSource : public Source {
- public:
-  explicit DbSource(Db* db);
+   public:
+    explicit DbSource(Db* db);
 
-  virtual bool MetaGet(string* key, string* value);
-  virtual bool Get(string* key, string* value);
+    virtual bool MetaGet(string* key, string* value);
+    virtual bool Get(string* key, string* value);
 
- protected:
-  Db* db_;
-  an<DbAccessor> metadata_;
-  an<DbAccessor> data_;
+   protected:
+    Db* db_;
+    an<DbAccessor> metadata_;
+    an<DbAccessor> data_;
 };
 
 }  // namespace rime

@@ -13,13 +13,13 @@
 namespace rime {
 
 class Matcher : public Segmentor {
- public:
-  explicit Matcher(const Ticket& ticket);
+   public:
+    explicit Matcher(const Ticket& ticket);
 
-  virtual bool Proceed(Segmentation* segmentation);
+    virtual bool Proceed(Segmentation* segmentation);
 
- protected:
-  RecognizerPatterns patterns_;
+   protected:
+    RecognizerPatterns patterns_;
 };
 
 }  // namespace rime

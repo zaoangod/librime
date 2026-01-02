@@ -18,22 +18,22 @@ class ReverseLookupDictionary;
 class TranslatorOptions;
 
 class ReverseLookupTranslator : public Translator {
- public:
-  ReverseLookupTranslator(const Ticket& ticket);
+   public:
+    ReverseLookupTranslator(const Ticket& ticket);
 
-  virtual an<Translation> Query(const string& input, const Segment& segment);
+    virtual an<Translation> Query(const string& input, const Segment& segment);
 
- protected:
-  void Initialize();
+   protected:
+    void Initialize();
 
-  string tag_;
-  bool initialized_ = false;
-  the<Dictionary> dict_;
-  the<ReverseLookupDictionary> rev_dict_;
-  the<TranslatorOptions> options_;
-  string prefix_;
-  string suffix_;
-  string tips_;
+    string tag_;
+    bool initialized_ = false;
+    the<Dictionary> dict_;
+    the<ReverseLookupDictionary> rev_dict_;
+    the<TranslatorOptions> options_;
+    string prefix_;
+    string suffix_;
+    string tips_;
 };
 
 }  // namespace rime

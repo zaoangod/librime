@@ -16,26 +16,23 @@ class Engine;
 class KeyEvent;
 
 enum ProcessResult {
-  kRejected,  // do the OS default processing
-  kAccepted,  // consume it
-  kNoop,      // leave it to other processors
+    kRejected,  // do the OS default processing
+    kAccepted,  // consume it
+    kNoop,      // leave it to other processors
 };
 
 class Processor : public Class<Processor, const Ticket&> {
- public:
-  explicit Processor(const Ticket& ticket)
-      : engine_(ticket.engine), name_space_(ticket.name_space) {}
-  virtual ~Processor() = default;
+   public:
+    explicit Processor(const Ticket& ticket) : engine_(ticket.engine), name_space_(ticket.name_space) {}
+    virtual ~Processor() = default;
 
-  virtual ProcessResult ProcessKeyEvent(const KeyEvent& key_event) {
-    return kNoop;
-  }
+    virtual ProcessResult ProcessKeyEvent(const KeyEvent& key_event) { return kNoop; }
 
-  string name_space() const { return name_space_; }
+    string name_space() const { return name_space_; }
 
- protected:
-  Engine* engine_;
-  string name_space_;
+   protected:
+    Engine* engine_;
+    string name_space_;
 };
 
 }  // namespace rime

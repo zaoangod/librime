@@ -13,15 +13,14 @@ class Config;
 class Deployer;
 
 class Signature {
- public:
-  Signature(const string& generator, const string& key = "signature")
-      : generator_(generator), key_(key) {}
+   public:
+    Signature(const string& generator, const string& key = "signature") : generator_(generator), key_(key) {}
 
-  bool Sign(Config* config, Deployer* deployer);
+    bool Sign(Config* config, Deployer* deployer);
 
- private:
-  string generator_;
-  string key_;
+   private:
+    string generator_;
+    string key_;
 };
 
 }  // namespace rime

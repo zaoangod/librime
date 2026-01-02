@@ -4,29 +4,28 @@
 namespace rime {
 
 class VoidLogger {
- public:
-  VoidLogger() {}
+   public:
+    VoidLogger() {}
 
-  // hack: an unnamed VoidLogger() cannot be used as an l-value
-  VoidLogger& stream() { return *this; }
+    // hack: an unnamed VoidLogger() cannot be used as an l-value
+    VoidLogger& stream() { return *this; }
 
-  template <class T>
-  VoidLogger& operator<<(const T& x) {
-    return *this;
-  }
+    template <class T>
+    VoidLogger& operator<<(const T& x) {
+        return *this;
+    }
 };
 
 // to avoid compiler warnings
 class Voidify {
- public:
-  Voidify() {}
-  void operator&(VoidLogger&) {}
+   public:
+    Voidify() {}
+    void operator&(VoidLogger&) {}
 };
 
 }  // namespace rime
 
-#define RIME_NO_LOG \
-  true ? (void)0 : rime::Voidify() & rime::VoidLogger().stream()
+#define RIME_NO_LOG true ? (void)0 : rime::Voidify() & rime::VoidLogger().stream()
 
 #define LOG(severity) RIME_NO_LOG
 #define VLOG(verboselevel) RIME_NO_LOG
@@ -54,8 +53,7 @@ class Voidify {
 #define DVLOG(verboselevel) VLOG(verboselevel)
 #define DLOG_IF(severity, condition) LOG_IF(severity, condition)
 #define DLOG_EVERY_N(severity, n) LOG_EVERY_N(severity, n)
-#define DLOG_IF_EVERY_N(severity, condition, n) \
-  LOG_IF_EVERY_N(severity, condition, n)
+#define DLOG_IF_EVERY_N(severity, condition, n) LOG_IF_EVERY_N(severity, condition, n)
 #define DLOG_ASSERT(condition) LOG_ASSERT(condition)
 
 #define DCHECK(condition) CHECK(condition)

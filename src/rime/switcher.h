@@ -18,61 +18,57 @@ class Context;
 class Translator;
 
 class Switcher : public Processor, public Engine {
- public:
-  Switcher(const Ticket& ticket);
-  virtual ~Switcher();
+   public:
+    Switcher(const Ticket& ticket);
+    virtual ~Switcher();
 
-  virtual bool ProcessKey(const KeyEvent& key_event) {
-    return ProcessKeyEvent(key_event) == kAccepted;
-  }
-  virtual ProcessResult ProcessKeyEvent(const KeyEvent& key_event);
+    virtual bool ProcessKey(const KeyEvent& key_event) { return ProcessKeyEvent(key_event) == kAccepted; }
+    virtual ProcessResult ProcessKeyEvent(const KeyEvent& key_event);
 
-  static int ForEachSchemaListEntry(
-      Config* config,
-      function<bool(const string& schema_id)> process_entry);
+    static int ForEachSchemaListEntry(Config* config, function<bool(const string& schema_id)> process_entry);
 
-  void SetActiveSchema(const string& schema_id);
-  Schema* CreateSchema();
-  void SelectNextSchema();
-  bool IsAutoSave(const string& option) const;
-  void RestoreSavedOptions();
+    void SetActiveSchema(const string& schema_id);
+    Schema* CreateSchema();
+    void SelectNextSchema();
+    bool IsAutoSave(const string& option) const;
+    void RestoreSavedOptions();
 
-  void RefreshMenu();
-  void Activate();
-  void Deactivate();
-  void DeactivateAndApply(function<void()> apply);
+    void RefreshMenu();
+    void Activate();
+    void Deactivate();
+    void DeactivateAndApply(function<void()> apply);
 
-  Engine* attached_engine() const { return engine_; }
-  Config* user_config() const { return user_config_.get(); }
-  bool active() const { return active_; }
+    Engine* attached_engine() const { return engine_; }
+    Config* user_config() const { return user_config_.get(); }
+    bool active() const { return active_; }
 
- protected:
-  void InitializeComponents();
-  void LoadSettings();
+   protected:
+    void InitializeComponents();
+    void LoadSettings();
 
-  void HighlightNextSchema();
-  void OnSelect(Context* ctx);
+    void HighlightNextSchema();
+    void OnSelect(Context* ctx);
 
-  the<Config> user_config_;
-  string caption_;
-  vector<KeyEvent> hotkeys_;
-  set<string> save_options_;
-  bool fold_options_ = false;
-  bool fix_schema_list_order_ = false;
+    the<Config> user_config_;
+    string caption_;
+    vector<KeyEvent> hotkeys_;
+    set<string> save_options_;
+    bool fold_options_ = false;
+    bool fix_schema_list_order_ = false;
 
-  vector<of<Processor>> processors_;
-  vector<of<Translator>> translators_;
-  bool active_ = false;
+    vector<of<Processor>> processors_;
+    vector<of<Translator>> translators_;
+    bool active_ = false;
 };
 
 class SwitcherCommand {
- public:
-  SwitcherCommand(const string& keyword) : keyword_(keyword) {}
-  virtual void Apply(Switcher* switcher) = 0;
-  const string& keyword() const { return keyword_; }
+   public:
+    SwitcherCommand(const string& keyword) : keyword_(keyword) {}
+    virtual void Apply(Switcher* switcher) = 0;
+    const string& keyword() const { return keyword_; }
 
- protected:
-  string keyword_;
+   protected:
+    string keyword_;
 };
 
 }  // namespace rime

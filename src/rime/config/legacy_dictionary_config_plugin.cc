@@ -7,18 +7,14 @@
 
 namespace rime {
 
-bool LegacyDictionaryConfigPlugin::ReviewCompileOutput(
-    ConfigCompiler* compiler,
-    an<ConfigResource> resource) {
-  // TODO: unimplemented
-  return true;
+bool LegacyDictionaryConfigPlugin::ReviewCompileOutput(ConfigCompiler* compiler, an<ConfigResource> resource) {
+    // TODO: unimplemented
+    return true;
 }
 
-bool LegacyDictionaryConfigPlugin::ReviewLinkOutput(
-    ConfigCompiler* compiler,
-    an<ConfigResource> resource) {
-  // TODO: unimplemented
-  return true;
+bool LegacyDictionaryConfigPlugin::ReviewLinkOutput(ConfigCompiler* compiler, an<ConfigResource> resource) {
+    // TODO: unimplemented
+    return true;
 }
 
 }  // namespace rime

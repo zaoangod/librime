@@ -13,53 +13,49 @@
 namespace rime {
 
 static inline size_t unistrlen(const string& text) {
-  return utf8::unchecked::distance(text.c_str(), text.c_str() + text.length());
+    return utf8::unchecked::distance(text.c_str(), text.c_str() + text.length());
 }
 
 class SingleCharFirstTranslation : public PrefetchTranslation {
- public:
-  SingleCharFirstTranslation(an<Translation> translation);
+   public:
+    SingleCharFirstTranslation(an<Translation> translation);
 
- private:
-  bool Rearrange();
+   private:
+    bool Rearrange();
 };
 
-SingleCharFirstTranslation::SingleCharFirstTranslation(
-    an<Translation> translation)
-    : PrefetchTranslation(translation) {
-  Rearrange();
+SingleCharFirstTranslation::SingleCharFirstTranslation(an<Translation> translation) : PrefetchTranslation(translation) {
+    Rearrange();
 }
 
 bool SingleCharFirstTranslation::Rearrange() {
-  if (exhausted()) {
-    return false;
-  }
-  CandidateQueue top;
-  CandidateQueue bottom;
-  while (!translation_->exhausted()) {
-    auto cand = translation_->Peek();
-    auto phrase = As<Phrase>(Candidate::GetGenuineCandidate(cand));
-    if (!phrase ||
-        (phrase->type() != "table" && phrase->type() != "user_table")) {
-      break;
+    if (exhausted()) {
+        return false;
     }
-    if (unistrlen(cand->text()) == 1) {
-      top.push_back(cand);
-    } else {
-      bottom.push_back(cand);
+    CandidateQueue top;
+    CandidateQueue bottom;
+    while (!translation_->exhausted()) {
+        auto cand = translation_->Peek();
+        auto phrase = As<Phrase>(Candidate::GetGenuineCandidate(cand));
+        if (!phrase || (phrase->type() != "table" && phrase->type() != "user_table")) {
+            break;
+        }
+        if (unistrlen(cand->text()) == 1) {
+            top.push_back(cand);
+        } else {
+            bottom.push_back(cand);
+        }
+        translation_->Next();
     }
-    translation_->Next();
-  }
-  cache_.splice(cache_.end(), top);
-  cache_.splice(cache_.end(), bottom);
-  return !cache_.empty();
+    cache_.splice(cache_.end(), top);
+    cache_.splice(cache_.end(), bottom);
+    return !cache_.empty();
 }
 
 SingleCharFilter::SingleCharFilter(const Ticket& ticket) : Filter(ticket) {}
 
-an<Translation> SingleCharFilter::Apply(an<Translation> translation,
-                                        CandidateList* candidates) {
-  return New<SingleCharFirstTranslation>(translation);
+an<Translation> SingleCharFilter::Apply(an<Translation> translation, CandidateList* candidates) {
+    return New<SingleCharFirstTranslation>(translation);
 }
 
 }  // namespace rime

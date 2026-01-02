@@ -13,19 +13,17 @@
 namespace rime {
 
 bool Signature::Sign(Config* config, Deployer* deployer) {
-  if (!config)
-    return false;
-  config->SetString(key_ + "/generator", generator_);
-  time_t now = time(NULL);
-  string time_str(ctime(&now));
-  boost::trim(time_str);
-  config->SetString(key_ + "/modified_time", time_str);
-  config->SetString(key_ + "/distribution_code_name",
-                    deployer->distribution_code_name);
-  config->SetString(key_ + "/distribution_version",
-                    deployer->distribution_version);
-  config->SetString(key_ + "/rime_version", RIME_VERSION);
-  return true;
+    if (!config)
+        return false;
+    config->SetString(key_ + "/generator", generator_);
+    time_t now = time(NULL);
+    string time_str(ctime(&now));
+    boost::trim(time_str);
+    config->SetString(key_ + "/modified_time", time_str);
+    config->SetString(key_ + "/distribution_code_name", deployer->distribution_code_name);
+    config->SetString(key_ + "/distribution_version", deployer->distribution_version);
+    config->SetString(key_ + "/rime_version", RIME_VERSION);
+    return true;
 }
 
 }  // namespace rime

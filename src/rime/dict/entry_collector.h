@@ -16,9 +16,9 @@
 namespace rime {
 
 struct RawDictEntry {
-  RawCode raw_code;
-  string text;
-  double weight;
+    RawCode raw_code;
+    string text;
+    double weight;
 };
 
 // code -> weight
@@ -34,47 +34,45 @@ class PresetVocabulary;
 class DictSettings;
 
 class EntryCollector : public PhraseCollector {
- public:
-  Syllabary syllabary;
-  bool build_syllabary = true;
-  vector<of<RawDictEntry>> entries;
-  size_t num_entries = 0;
-  ReverseLookupTable stems;
+   public:
+    Syllabary syllabary;
+    bool build_syllabary = true;
+    vector<of<RawDictEntry>> entries;
+    size_t num_entries = 0;
+    ReverseLookupTable stems;
 
- public:
-  EntryCollector();
-  explicit EntryCollector(Syllabary&& fixed_syllabary);
-  virtual ~EntryCollector();
+   public:
+    EntryCollector();
+    explicit EntryCollector(Syllabary&& fixed_syllabary);
+    virtual ~EntryCollector();
 
-  void Configure(DictSettings* settings);
-  void Collect(const vector<path>& dict_files);
+    void Configure(DictSettings* settings);
+    void Collect(const vector<path>& dict_files);
 
-  // export contents of table and prism to text files
-  void Dump(const path& file_path) const;
+    // export contents of table and prism to text files
+    void Dump(const path& file_path) const;
 
-  void CreateEntry(const string& word,
-                   const string& code_str,
-                   const string& weight_str);
-  bool TranslateWord(const string& word, vector<string>* code);
+    void CreateEntry(const string& word, const string& code_str, const string& weight_str);
+    bool TranslateWord(const string& word, vector<string>* code);
 
- protected:
-  void LoadPresetVocabulary(DictSettings* settings);
-  // call Collect() multiple times for all required tables
-  void Collect(const path& dict_file);
-  // encode all collected entries
-  void Finish();
+   protected:
+    void LoadPresetVocabulary(DictSettings* settings);
+    // call Collect() multiple times for all required tables
+    void Collect(const path& dict_file);
+    // encode all collected entries
+    void Finish();
 
- protected:
-  the<PresetVocabulary> preset_vocabulary;
-  the<Encoder> encoder;
-  EncodeQueue encode_queue;
-  set<string /* word */> collection;
-  WordMap words;
-  WeightMap total_weight;
+   protected:
+    the<PresetVocabulary> preset_vocabulary;
+    the<Encoder> encoder;
+    EncodeQueue encode_queue;
+    set<string /* word */> collection;
+    WordMap words;
+    WeightMap total_weight;
 
- private:
-  string current_dict_file;
-  size_t line_number;
+   private:
+    string current_dict_file;
+    size_t line_number;
 };
 
 }  // namespace rime

@@ -14,20 +14,20 @@
 namespace rime {
 
 class DictSettings : public Config {
- public:
-  DictSettings();
-  bool LoadDictHeader(std::istream& stream);
-  bool empty();
-  string dict_name();
-  string dict_version();
-  string sort_order();
-  bool use_preset_vocabulary();
-  string vocabulary();
-  bool use_rule_based_encoder();
-  int max_phrase_length();
-  double min_phrase_weight();
-  an<ConfigList> GetTables();
-  int GetColumnIndex(const string& column_label);
+   public:
+    DictSettings();
+    bool LoadDictHeader(std::istream& stream);
+    bool empty();
+    string dict_name();
+    string dict_version();
+    string sort_order();
+    bool use_preset_vocabulary();
+    string vocabulary();
+    bool use_rule_based_encoder();
+    int max_phrase_length();
+    double min_phrase_weight();
+    an<ConfigList> GetTables();
+    int GetColumnIndex(const string& column_label);
 };
 
 }  // namespace rime

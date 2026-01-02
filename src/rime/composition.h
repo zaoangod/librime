@@ -12,26 +12,24 @@
 namespace rime {
 
 struct Preedit {
-  string text;
-  size_t caret_pos = 0;
-  size_t sel_start = 0;
-  size_t sel_end = 0;
+    string text;
+    size_t caret_pos = 0;
+    size_t sel_start = 0;
+    size_t sel_end = 0;
 };
 
 class Composition : public Segmentation {
- public:
-  Composition() = default;
+   public:
+    Composition() = default;
 
-  bool HasFinishedComposition() const;
-  Preedit GetPreedit(const string& full_input,
-                     size_t caret_pos,
-                     const string& caret) const;
-  string GetPrompt() const;
-  string GetCommitText() const;
-  string GetScriptText(bool keep_selection = true) const;
-  RIME_DLL string GetDebugText() const;
-  // Returns text of the last segment before the given position.
-  string GetTextBefore(size_t pos) const;
+    bool HasFinishedComposition() const;
+    Preedit GetPreedit(const string& full_input, size_t caret_pos, const string& caret) const;
+    string GetPrompt() const;
+    string GetCommitText() const;
+    string GetScriptText(bool keep_selection = true) const;
+    RIME_DLL string GetDebugText() const;
+    // Returns text of the last segment before the given position.
+    string GetTextBefore(size_t pos) const;
 };
 
 }  // namespace rime

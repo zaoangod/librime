@@ -10,14 +10,14 @@ class ResourceResolver;
 
 template <class T>
 class DbPool {
- public:
-  explicit DbPool(the<ResourceResolver> resource_resolver);
+   public:
+    explicit DbPool(the<ResourceResolver> resource_resolver);
 
-  an<T> GetDb(const string& db_name);
+    an<T> GetDb(const string& db_name);
 
- protected:
-  the<ResourceResolver> resource_resolver_;
-  map<string, weak<T>> db_pool_;
+   protected:
+    the<ResourceResolver> resource_resolver_;
+    map<string, weak<T>> db_pool_;
 };
 
 }  // namespace rime

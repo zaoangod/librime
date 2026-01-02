@@ -12,11 +12,10 @@
 namespace rime {
 
 class Uniquifier : public Filter {
- public:
-  explicit Uniquifier(const Ticket& ticket);
+   public:
+    explicit Uniquifier(const Ticket& ticket);
 
-  virtual an<Translation> Apply(an<Translation> translation,
-                                CandidateList* candidates);
+    virtual an<Translation> Apply(an<Translation> translation, CandidateList* candidates);
 };
 
 }  // namespace rime

@@ -12,18 +12,18 @@
 namespace rime {
 
 class TableDb : public TextDb {
- public:
-  TableDb(const path& file_path, const string& db_name);
+   public:
+    TableDb(const path& file_path, const string& db_name);
 
-  static const TextFormat format;
+    static const TextFormat format;
 };
 
 // read-only tabledb
 class StableDb : public TableDb {
- public:
-  StableDb(const path& file_path, const string& db_name);
+   public:
+    StableDb(const path& file_path, const string& db_name);
 
-  virtual bool Open();
+    virtual bool Open();
 };
 
 }  // namespace rime

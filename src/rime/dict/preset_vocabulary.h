@@ -14,26 +14,26 @@ namespace rime {
 struct VocabularyDb;
 
 class PresetVocabulary {
- public:
-  explicit PresetVocabulary(const string& vocabulary);
-  ~PresetVocabulary();
+   public:
+    explicit PresetVocabulary(const string& vocabulary);
+    ~PresetVocabulary();
 
-  // random access
-  bool GetWeightForEntry(const string& key, double* weight);
-  // traversing
-  void Reset();
-  bool GetNextEntry(string* key, string* value);
-  bool IsQualifiedPhrase(const string& phrase, const string& weight_str);
+    // random access
+    bool GetWeightForEntry(const string& key, double* weight);
+    // traversing
+    void Reset();
+    bool GetNextEntry(string* key, string* value);
+    bool IsQualifiedPhrase(const string& phrase, const string& weight_str);
 
-  void set_max_phrase_length(int length) { max_phrase_length_ = length; }
-  void set_min_phrase_weight(double weight) { min_phrase_weight_ = weight; }
+    void set_max_phrase_length(int length) { max_phrase_length_ = length; }
+    void set_min_phrase_weight(double weight) { min_phrase_weight_ = weight; }
 
-  static path DictFilePath(const string& vacabulary);
+    static path DictFilePath(const string& vacabulary);
 
- protected:
-  the<VocabularyDb> db_;
-  int max_phrase_length_ = 0;
-  double min_phrase_weight_ = 0.0;
+   protected:
+    the<VocabularyDb> db_;
+    int max_phrase_length_ = 0;
+    double min_phrase_weight_ = 0.0;
 };
 
 }  // namespace rime

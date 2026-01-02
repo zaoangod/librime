@@ -14,10 +14,10 @@
 namespace rime {
 
 struct Page {
-  int page_size = 0;
-  int page_no = 0;
-  bool is_last_page = false;
-  CandidateList candidates;
+    int page_size = 0;
+    int page_no = 0;
+    bool is_last_page = false;
+    CandidateList candidates;
 };
 
 class Filter;
@@ -25,26 +25,26 @@ class MergedTranslation;
 class Translation;
 
 class Menu {
- public:
-  RIME_DLL Menu();
+   public:
+    RIME_DLL Menu();
 
-  RIME_DLL void AddTranslation(an<Translation> translation);
-  void AddFilter(Filter* filter);
+    RIME_DLL void AddTranslation(an<Translation> translation);
+    void AddFilter(Filter* filter);
 
-  RIME_DLL size_t Prepare(size_t candidate_count);
-  RIME_DLL Page* CreatePage(size_t page_size, size_t page_no);
-  an<Candidate> GetCandidateAt(size_t index);
+    RIME_DLL size_t Prepare(size_t candidate_count);
+    RIME_DLL Page* CreatePage(size_t page_size, size_t page_no);
+    an<Candidate> GetCandidateAt(size_t index);
 
-  // CAVEAT: returns the number of candidates currently obtained,
-  // rather than the total number of available candidates.
-  size_t candidate_count() const { return candidates_.size(); }
+    // CAVEAT: returns the number of candidates currently obtained,
+    // rather than the total number of available candidates.
+    size_t candidate_count() const { return candidates_.size(); }
 
-  bool empty() const;
+    bool empty() const;
 
- private:
-  an<MergedTranslation> merged_;
-  an<Translation> result_;
-  CandidateList candidates_;
+   private:
+    an<MergedTranslation> merged_;
+    an<Translation> result_;
+    CandidateList candidates_;
 };
 
 }  // namespace rime

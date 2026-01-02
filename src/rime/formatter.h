@@ -17,16 +17,15 @@ namespace rime {
 class Engine;
 
 class Formatter : public Class<Formatter, const Ticket&> {
- public:
-  Formatter(const Ticket& ticket)
-      : engine_(ticket.engine), name_space_(ticket.name_space) {}
-  virtual ~Formatter() = default;
+   public:
+    Formatter(const Ticket& ticket) : engine_(ticket.engine), name_space_(ticket.name_space) {}
+    virtual ~Formatter() = default;
 
-  virtual void Format(string* text) = 0;
+    virtual void Format(string* text) = 0;
 
- protected:
-  Engine* engine_;
-  string name_space_;
+   protected:
+    Engine* engine_;
+    string name_space_;
 };
 
 }  // namespace rime

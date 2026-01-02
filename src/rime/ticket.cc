@@ -11,16 +11,12 @@ namespace rime {
 
 Ticket::Ticket(Schema* s, const string& ns) : schema(s), name_space(ns) {}
 
-Ticket::Ticket(Engine* e, const string& ns, const string& prescription)
-    : engine(e),
-      schema(e ? e->schema() : NULL),
-      name_space(ns),
-      klass(prescription) {
-  size_t separator = klass.find('@');
-  if (separator != string::npos) {
-    name_space = klass.substr(separator + 1);
-    klass.resize(separator);
-  }
+Ticket::Ticket(Engine* e, const string& ns, const string& prescription) : engine(e), schema(e ? e->schema() : NULL), name_space(ns), klass(prescription) {
+    size_t separator = klass.find('@');
+    if (separator != string::npos) {
+        name_space = klass.substr(separator + 1);
+        klass.resize(separator);
+    }
 }
 
 }  // namespace rime

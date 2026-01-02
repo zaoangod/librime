@@ -17,18 +17,18 @@ struct KeyBinding;
 class KeyBindings;
 
 class KeyBinder : public Processor {
- public:
-  KeyBinder(const Ticket& ticket);
-  virtual ProcessResult ProcessKeyEvent(const KeyEvent& key_event);
+   public:
+    KeyBinder(const Ticket& ticket);
+    virtual ProcessResult ProcessKeyEvent(const KeyEvent& key_event);
 
- protected:
-  void LoadConfig();
-  bool ReinterpretPagingKey(const KeyEvent& key_event);
-  void PerformKeyBinding(const KeyBinding& binding);
+   protected:
+    void LoadConfig();
+    bool ReinterpretPagingKey(const KeyEvent& key_event);
+    void PerformKeyBinding(const KeyBinding& binding);
 
-  the<KeyBindings> key_bindings_;
-  bool redirecting_;
-  int last_key_;
+    the<KeyBindings> key_bindings_;
+    bool redirecting_;
+    int last_key_;
 };
 
 }  // namespace rime

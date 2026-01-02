@@ -13,12 +13,12 @@ struct Segment;
 struct Ticket;
 
 class TagMatching {
- public:
-  explicit TagMatching(const Ticket& ticket);
-  bool TagsMatch(Segment* segment);
+   public:
+    explicit TagMatching(const Ticket& ticket);
+    bool TagsMatch(Segment* segment);
 
- protected:
-  vector<string> tags_;
+   protected:
+    vector<string> tags_;
 };
 
 }  // namespace rime

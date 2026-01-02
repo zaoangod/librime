@@ -12,28 +12,28 @@
 namespace rime {
 
 TagMatching::TagMatching(const Ticket& ticket) {
-  if (!ticket.schema)
-    return;
-  Config* config = ticket.schema->config();
-  if (auto tags = config->GetList(ticket.name_space + "/tags")) {
-    for (auto it = tags->begin(); it != tags->end(); ++it) {
-      if (Is<ConfigValue>(*it)) {
-        tags_.push_back(As<ConfigValue>(*it)->str());
-      }
+    if (!ticket.schema)
+        return;
+    Config* config = ticket.schema->config();
+    if (auto tags = config->GetList(ticket.name_space + "/tags")) {
+        for (auto it = tags->begin(); it != tags->end(); ++it) {
+            if (Is<ConfigValue>(*it)) {
+                tags_.push_back(As<ConfigValue>(*it)->str());
+            }
+        }
     }
-  }
 }
 
 bool TagMatching::TagsMatch(Segment* segment) {
-  if (!segment)
+    if (!segment)
+        return false;
+    if (tags_.empty())  // match any
+        return true;
+    for (const string& tag : tags_) {
+        if (segment->HasTag(tag))
+            return true;
+    }
     return false;
-  if (tags_.empty())  // match any
-    return true;
-  for (const string& tag : tags_) {
-    if (segment->HasTag(tag))
-      return true;
-  }
-  return false;
 }
 
 }  // namespace rime

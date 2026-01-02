@@ -15,18 +15,16 @@ class Engine;
 class Schema;
 
 struct Ticket {
-  Engine* engine = nullptr;
-  Schema* schema = nullptr;
-  string name_space;
-  string klass;
+    Engine* engine = nullptr;
+    Schema* schema = nullptr;
+    string name_space;
+    string klass;
 
-  Ticket() = default;
-  Ticket(Schema* s, const string& ns);
-  // prescription: in the form of "klass" or "klass@alias"
-  // where alias, if given, will override default name space
-  RIME_DLL Ticket(Engine* e,
-                  const string& ns = "",
-                  const string& prescription = "");
+    Ticket() = default;
+    Ticket(Schema* s, const string& ns);
+    // prescription: in the form of "klass" or "klass@alias"
+    // where alias, if given, will override default name space
+    RIME_DLL Ticket(Engine* e, const string& ns = "", const string& prescription = "");
 };
 
 }  // namespace rime

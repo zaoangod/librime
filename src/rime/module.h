@@ -16,24 +16,24 @@ typedef struct rime_module_t RimeModule;
 namespace rime {
 
 class ModuleManager {
- public:
-  // module is supposed to be a pointer to static variable
-  void Register(const string& name, RimeModule* module);
-  RimeModule* Find(const string& name);
+   public:
+    // module is supposed to be a pointer to static variable
+    void Register(const string& name, RimeModule* module);
+    RimeModule* Find(const string& name);
 
-  void LoadModule(RimeModule* module);
-  void UnloadModules();
+    void LoadModule(RimeModule* module);
+    void UnloadModules();
 
-  static ModuleManager& instance();
+    static ModuleManager& instance();
 
- private:
-  ModuleManager() {}
+   private:
+    ModuleManager() {}
 
-  // module registry
-  using ModuleMap = map<string, RimeModule*>;
-  ModuleMap map_;
-  // set of loaded modules
-  std::unordered_set<RimeModule*> loaded_;
+    // module registry
+    using ModuleMap = map<string, RimeModule*>;
+    ModuleMap map_;
+    // set of loaded modules
+    std::unordered_set<RimeModule*> loaded_;
 };
 
 }  // namespace rime

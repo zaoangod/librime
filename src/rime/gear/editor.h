@@ -18,43 +18,43 @@ namespace rime {
 class Context;
 
 class Editor : public Processor, public KeyBindingProcessor<Editor> {
- public:
-  typedef ProcessResult CharHandler(Context* ctx, int ch);
-  using CharHandlerPtr = ProcessResult (Editor::*)(Context* ctx, int ch);
+   public:
+    typedef ProcessResult CharHandler(Context* ctx, int ch);
+    using CharHandlerPtr = ProcessResult (Editor::*)(Context* ctx, int ch);
 
-  Editor(const Ticket& ticket, bool auto_commit);
-  ProcessResult ProcessKeyEvent(const KeyEvent& key_event);
+    Editor(const Ticket& ticket, bool auto_commit);
+    ProcessResult ProcessKeyEvent(const KeyEvent& key_event);
 
-  Handler Confirm;
-  Handler ToggleSelection;
-  Handler CommitComment;
-  Handler CommitScriptText;
-  Handler CommitRawInput;
-  Handler CommitComposition;
-  Handler RevertLastEdit;
-  Handler BackToPreviousInput;
-  Handler BackToPreviousSyllable;
-  Handler DeleteCandidate;
-  Handler DeleteChar;
-  Handler CancelComposition;
+    Handler Confirm;
+    Handler ToggleSelection;
+    Handler CommitComment;
+    Handler CommitScriptText;
+    Handler CommitRawInput;
+    Handler CommitComposition;
+    Handler RevertLastEdit;
+    Handler BackToPreviousInput;
+    Handler BackToPreviousSyllable;
+    Handler DeleteCandidate;
+    Handler DeleteChar;
+    Handler CancelComposition;
 
-  CharHandler DirectCommit;
-  CharHandler AddToInput;
+    CharHandler DirectCommit;
+    CharHandler AddToInput;
 
- protected:
-  void LoadConfig();
+   protected:
+    void LoadConfig();
 
-  CharHandlerPtr char_handler_ = nullptr;
+    CharHandlerPtr char_handler_ = nullptr;
 };
 
 class FluidEditor : public Editor {
- public:
-  FluidEditor(const Ticket& ticket);
+   public:
+    FluidEditor(const Ticket& ticket);
 };
 
 class ExpressEditor : public Editor {
- public:
-  ExpressEditor(const Ticket& ticket);
+   public:
+    ExpressEditor(const Ticket& ticket);
 };
 
 }  // namespace rime

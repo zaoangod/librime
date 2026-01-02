@@ -12,16 +12,16 @@
 namespace rime {
 
 class HistoryTranslator : public Translator {
- public:
-  HistoryTranslator(const Ticket& ticket);
+   public:
+    HistoryTranslator(const Ticket& ticket);
 
-  virtual an<Translation> Query(const string& input, const Segment& segment);
+    virtual an<Translation> Query(const string& input, const Segment& segment);
 
- protected:
-  string tag_;
-  string input_;
-  int size_;
-  double initial_quality_;
+   protected:
+    string tag_;
+    string input_;
+    int size_;
+    double initial_quality_;
 };
 
 }  // namespace rime

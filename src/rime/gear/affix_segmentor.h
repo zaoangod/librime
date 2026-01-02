@@ -12,18 +12,18 @@
 namespace rime {
 
 class AffixSegmentor : public Segmentor {
- public:
-  explicit AffixSegmentor(const Ticket& ticket);
+   public:
+    explicit AffixSegmentor(const Ticket& ticket);
 
-  virtual bool Proceed(Segmentation* segmentation);
+    virtual bool Proceed(Segmentation* segmentation);
 
- protected:
-  string tag_;
-  string prefix_;
-  string suffix_;
-  string tips_;
-  string closing_tips_;
-  set<string> extra_tags_;
+   protected:
+    string tag_;
+    string prefix_;
+    string suffix_;
+    string tips_;
+    string closing_tips_;
+    set<string> extra_tags_;
 };
 
 }  // namespace rime
