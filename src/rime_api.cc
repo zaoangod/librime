@@ -6,9 +6,6 @@
 //
 
 #include "rime_api_impl.h"
-
-#include <cstring>
-#include <sstream>
 #include <rime/common.h>
 #include <rime/module.h>
 #include <rime/setup.h>
