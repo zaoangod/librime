@@ -6,8 +6,14 @@ TabWidth: 4                  # Tab 对应的空格数
 IndentWidth: 4               # 缩进空格宽度
 UseTab: Never                # 不使用 Tab，全部用空格
 IndentCaseLabels: true       # switch 的 case 标签缩进
-IndentAccessModifiers: false # 类的访问修饰符（public/private）不缩进
 ContinuationIndentWidth: 4   # 换行后的续行缩进宽度
+IndentAccessModifiers: false # 类的访问修饰符（public/private）不缩进
 
 # 换行相关
-ColumnLimit: 999                         # 代码行最大字符数（超过自动换行）
+ColumnLimit: 999             # 代码行最大字符数（超过自动换行）
+
+# Namespace 缩进核心配置
+NamespaceIndentation: All
+
+# 其他常用配套配置
+AccessModifierOffset: -4     # public/private 向左偏移2个空格
